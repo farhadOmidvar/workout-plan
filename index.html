@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>3-Day Beginner Gym Plan (Core + Back + Glutes)</title>
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#121826; --text:#e6eaf2; --muted:#a9b1c3;
+      --accent:#6ee7b7; --accent2:#60a5fa; --border:#263144;
+      --shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#0b0f14 0%, #0a1220 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+    }
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,15,20,.82);
+      backdrop-filter:saturate(160%) blur(14px);
+      border-bottom:1px solid var(--border);
+      padding:14px 16px calc(12px + env(safe-area-inset-top));
+    }
+    header h1{ margin:0; font-size:16px; line-height:1.2; }
+    header p{ margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.35; }
+    .wrap{ max-width:780px; margin:0 auto; padding:14px; }
+    .meta{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin:12px 0 14px;
+    }
+    .pill{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:13px;
+      line-height:1.35;
+      box-shadow: var(--shadow);
+    }
+    .pill b{ color:var(--accent); }
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding:4px 0 8px;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .tabs::-webkit-scrollbar{ display:none; }
+    .tab{
+      flex:0 0 auto;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      font-size:13px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .tab.active{ border-color:#3a4a66; background:rgba(96,165,250,.10); }
+
+    .day{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      margin:12px 0;
+      box-shadow: var(--shadow);
+    }
+    .day h2{ margin:0 0 8px; font-size:16px; }
+    .section-title{
+      margin:12px 0 8px;
+      color:var(--accent2);
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+    }
+    ul{ margin:8px 0 0 18px; color:var(--muted); font-size:13px; line-height:1.45; }
+
+    details{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.02);
+      margin:10px 0;
+      overflow:hidden;
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .ex-left{ min-width:0; }
+    .ex-title{
+      margin:0;
+      font-size:14px;
+      line-height:1.25;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .sets{ color:var(--muted); font-size:12px; margin-top:4px; }
+    .tag{
+      font-size:11px;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      white-space:nowrap;
+      align-self:flex-start;
+    }
+    .video{
+      border-top:1px solid var(--border);
+      padding:10px 12px 12px;
+    }
+    iframe{ width:100%; aspect-ratio:16/9; border:0; border-radius:12px; background:#000; }
+
+    /* Checkbox tracker */
+    .checkwrap{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    input[type="checkbox"]{
+      width:22px; height:22px;
+      accent-color: var(--accent);
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+    .done-badge{
+      display:none;
+      font-size:11px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:rgba(110,231,183,.12);
+      border:1px solid rgba(110,231,183,.25);
+      color:var(--accent);
+      margin-left:8px;
+      white-space:nowrap;
+    }
+    .is-done .done-badge{ display:inline-block; }
+    .is-done .ex-title span.name{ text-decoration:line-through; opacity:.8; }
+    .is-done summary{ background:rgba(110,231,183,.06); }
+
+    /* Bottom action bar for iPhone */
+    .bottom-bar{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+      background:rgba(11,15,20,.85);
+      backdrop-filter:saturate(160%) blur(14px);
+      border-top:1px solid var(--border);
+      z-index:60;
+    }
+    .actions{
+      max-width:780px;
+      margin:0 auto;
+      display:flex;
+      gap:10px;
+    }
+    button{
+      flex:1;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:12px 12px;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+    button.primary{
+      border-color:rgba(96,165,250,.35);
+      background:rgba(96,165,250,.14);
+    }
+    .tips{
+      margin-top:14px;
+      border:1px dashed var(--border);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(110,231,183,.06);
+      box-shadow: var(--shadow);
+    }
+    .tips h3{ margin:0 0 8px; font-size:14px; color:var(--accent); }
+    .note{ color:var(--muted); font-size:13px; line-height:1.5; margin-top:8px; }
+    .small{ font-size:12px; color:var(--muted); }
+
+    /* Make it very iPhone friendly */
+    @media (max-width:420px){
+      .pill{ font-size:12.5px; }
+      summary{ padding:12px; }
+      .tag{ display:none; } /* less clutter on small screens */
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>3-Day Beginner Gym Plan</h1>
+  <p>Focus: <b>Core (lower belly)</b>, <b>Back</b>, <b>Glutes</b> • 3 days/week • 45–60 min</p>
+  <p class="small">Tap an exercise to open the video. ✅ Check it off when done (saves automatically).</p>
+</header>
+
+<div class="wrap">
+  <div class="meta">
+    <div class="pill"><b>Schedule:</b> Mon / Wed / Fri (or any 3 non-consecutive days)</div>
+    <div class="pill"><b>Rest:</b> 45–75s between sets • Last 2 reps should feel challenging (no pain)</div>
+    <div class="pill"><b>Progress:</b> Weeks 1–2 learn form • Week 3+ add 2 reps OR a little weight</div>
+  </div>
+
+  <nav class="tabs" aria-label="Quick jump">
+    <a class="tab" href="#day1">Day 1</a>
+    <a class="tab" href="#day2">Day 2</a>
+    <a class="tab" href="#day3">Day 3</a>
+    <a class="tab" href="#tips">Tips</a>
+  </nav>
+
+  <!-- DAY 1 -->
+  <section class="day" id="day1">
+    <h2>Day 1 — Glutes + Core (Lower Belly Focus)</h2>
+
+    <div class="section-title">Warm-up (8 min)</div>
+    <ul>
+      <li>Treadmill walk or bike — 5 min</li>
+      <li>Hip circles + leg swings — 3 min</li>
+    </ul>
+
+    <div class="section-title">Workout (tap to expand)</div>
+
+    <!-- EX 1 -->
+    <details class="exercise" data-key="d1_glute_bridge">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Glute Bridge (Machine or Bodyweight)</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 12–15</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/wPM8icPu6H8" title="Glute Bridge" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <!-- EX 2 -->
+    <details class="exercise" data-key="d1_goblet_squat">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Goblet Squat</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 10–12</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes/Legs</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/MeIiIdhvXT4" title="Goblet Squat" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <!-- EX 3 -->
+    <details class="exercise" data-key="d1_leg_press">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Leg Press (Feet High & Wide)</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 12</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/IZxyjW7MPJQ" title="Leg Press" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <!-- EX 4 -->
+    <details class="exercise" data-key="d1_cable_kickbacks">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Cable Kickbacks</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 12 each leg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/Q6B1K0W1x0Y" title="Cable Kickbacks" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Core (Lower Belly)</div>
+
+    <!-- EX 5 -->
+    <details class="exercise" data-key="d1_reverse_crunch">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Reverse Crunch</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 12–15</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Lower Abs</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/JB2oyawG9KI" title="Reverse Crunch" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <!-- EX 6 -->
+    <details class="exercise" data-key="d1_dead_bug">
+      <summary>
+        <div class="ex-left">
+          <div class="ex-title">
+            <div class="checkwrap">
+              <input type="checkbox" />
+              <div>
+                <span class="name">Dead Bug</span>
+                <span class="done-badge">DONE</span>
+                <div class="sets">3 × 10 each side</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Core</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/4XLEnwUr1d8" title="Dead Bug" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Cooldown (5 min)</div>
+    <ul>
+      <li>Hip flexor stretch</li>
+      <li>Hamstring stretch</li>
+    </ul>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day" id="day2">
+    <h2>Day 2 — Back + Core (Posture & Waist)</h2>
+
+    <div class="section-title">Warm-up (8 min)</div>
+    <ul>
+      <li>Row machine — 5 min</li>
+      <li>Band pull-aparts — 3 min</li>
+    </ul>
+
+    <div class="section-title">Workout (tap to expand)</div>
+
+    <details class="exercise" data-key="d2_lat_pulldown">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Lat Pulldown</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 10–12</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Back</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/CAwf7n6Luuc" title="Lat Pulldown" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d2_cable_row">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Seated Cable Row</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 12</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Back</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/HJSVR_67OlM" title="Seated Cable Row" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d2_db_rdl">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Dumbbell Romanian Deadlift (RDL)</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 10</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes/Hams</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/0YqRzHk2PjE" title="Dumbbell Romanian Deadlift" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d2_back_extension">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Back Extension (Bodyweight)</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 12</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Lower Back</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/ph3pddpKzzw" title="Back Extension" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Core</div>
+
+    <details class="exercise" data-key="d2_cable_crunch">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Cable Crunch</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 12–15</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Abs</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/AV5PmZJIrrw" title="Cable Crunch" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d2_side_plank">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Side Plank (Knees OK)</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 20–30 sec each side</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Obliques</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/K2VljzCC16g" title="Side Plank" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Cooldown</div>
+    <ul>
+      <li>Cat–cow stretch</li>
+      <li>Lower back stretch</li>
+    </ul>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day" id="day3">
+    <h2>Day 3 — Glutes + Core (Toning & Stability)</h2>
+
+    <div class="section-title">Warm-up (8 min)</div>
+    <ul>
+      <li>Stair climber — 5 min</li>
+      <li>Band lateral walks — 3 min</li>
+    </ul>
+
+    <div class="section-title">Workout (tap to expand)</div>
+
+    <details class="exercise" data-key="d3_hip_thrust">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Hip Thrust (Bench or Machine)</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 12</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/LM8XHLYJoYs" title="Hip Thrust" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d3_walking_lunges">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Walking Lunges</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 10 each leg</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes/Legs</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/wrwwXE_x-pQ" title="Walking Lunges" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d3_step_ups">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Step-Ups</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 10 each leg</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glutes</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/dQqApCGd5Ss" title="Step Ups" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d3_abductor">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Abductor Machine</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 15</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Glute Med</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/G_8LItOiZ0o" title="Abductor Machine" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Core (Lower Belly Burn)</div>
+
+    <details class="exercise" data-key="d3_leg_raises">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Lying Leg Raises (Bent Knees if needed)</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 10–12</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Lower Abs</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/JB2oyawG9KI" title="Leg Raises / Reverse Crunch" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <details class="exercise" data-key="d3_plank">
+      <summary>
+        <div class="ex-left">
+          <div class="checkwrap">
+            <input type="checkbox" />
+            <div>
+              <span class="name">Plank</span><span class="done-badge">DONE</span>
+              <div class="sets">3 × 20–40 sec</div>
+            </div>
+          </div>
+        </div>
+        <span class="tag">Core</span>
+      </summary>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/pSHjTRCQxIw" title="Plank" allowfullscreen></iframe>
+      </div>
+    </details>
+
+    <div class="section-title">Cooldown</div>
+    <ul>
+      <li>Glute stretch</li>
+      <li>Cobra stretch</li>
+    </ul>
+  </section>
+
+  <section class="tips" id="tips">
+    <h3>Simple Tips</h3>
+    <ul>
+      <li>Keep ribs down + core tight (avoid arching lower back)</li>
+      <li>Move slowly on core exercises — quality reps</li>
+      <li>If something hurts, skip it and do the next one</li>
+    </ul>
+    <div class="note">Tracker saves in the phone browser (local storage). If she opens the file in a different browser/app, it may start fresh.</div>
+  </section>
+</div>
+
+<div class="bottom-bar">
+  <div class="actions">
+    <button class="primary" id="btnMarkDay">Mark all in this Day ✅</button>
+    <button id="btnReset">Reset all</button>
+  </div>
+</div>
+
+<script>
+  // --- Tracker using localStorage ---
+  const STORAGE_KEY = "beginner_gym_plan_checks_v1";
+
+  function loadState(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch(e){ return {}; }
+  }
+  function saveState(state){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  const state = loadState();
+
+  function applyCheckbox(detailsEl, checked){
+    const cb = detailsEl.querySelector('input[type="checkbox"]');
+    cb.checked = !!checked;
+    detailsEl.classList.toggle("is-done", !!checked);
+  }
+
+  // initialize
+  document.querySelectorAll('details.exercise').forEach(d => {
+    const key = d.dataset.key;
+    applyCheckbox(d, state[key]);
+
+    const cb = d.querySelector('input[type="checkbox"]');
+    cb.addEventListener("click", (ev) => {
+      // stop summary toggle when tapping checkbox
+      ev.stopPropagation();
+    });
+    cb.addEventListener("change", () => {
+      state[key] = cb.checked;
+      saveState(state);
+      d.classList.toggle("is-done", cb.checked);
+    });
+  });
+
+  // --- Tabs: highlight active based on scroll ---
+  const tabs = Array.from(document.querySelectorAll(".tab"));
+  const sections = ["day1","day2","day3","tips"].map(id => document.getElementById(id));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        tabs.forEach(t => t.classList.toggle("active", t.getAttribute("href") === "#" + entry.target.id));
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Smooth scrolling for iPhone
+  tabs.forEach(t => {
+    t.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = t.getAttribute("href").slice(1);
+      document.getElementById(id).scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+  });
+
+  // --- Bottom actions ---
+  function currentSectionId(){
+    // Find the section closest to top
+    let best = sections[0], bestDist = Infinity;
+    sections.forEach(s => {
+      const r = s.getBoundingClientRect();
+      const dist = Math.abs(r.top - 80); // header offset
+      if(dist < bestDist){ bestDist = dist; best = s; }
+    });
+    return best.id;
+  }
+
+  document.getElementById("btnMarkDay").addEventListener("click", () => {
+    const id = currentSectionId();
+    const container = document.getElementById(id);
+    const items = container.querySelectorAll('details.exercise');
+    items.forEach(d => {
+      const key = d.dataset.key;
+      state[key] = true;
+      applyCheckbox(d, true);
+    });
+    saveState(state);
+  });
+
+  document.getElementById("btnReset").addEventListener("click", () => {
+    if(!confirm("Reset all checkboxes?")) return;
+    Object.keys(state).forEach(k => delete state[k]);
+    document.querySelectorAll('details.exercise').forEach(d => applyCheckbox(d, false));
+    saveState(state);
+  });
+</script>
+</body>
+</html>
